@@ -69,6 +69,7 @@ celerybeat-schedule
 
 # SageMath parsed files
 *.sage.py
+*.lock
 
 # Environments
 .vscode
@@ -79,7 +80,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-Pipfile.lock
+
 # Spyder project settings
 .spyderproject
 .spyproject
