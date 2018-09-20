@@ -69,5 +69,21 @@ class OrderActivity(Resource):
                 order[0]["status"] = json_data["status"]
                 return {"Message": "Order status updated"}, 200
                 # return {"Message": "Invalid order item"}, 400
-            return {'Message': "You can not update an order with empty entries"}, 400
-        return {"Message": "Order with ID = {} does not exist".format(order_id)}, 404
+            return {
+                "Message":
+                "You can not update an order with empty entries"}, 400
+        return {
+            "Message":
+            "Order with ID = {} does not exist".format(order_id)}, 404
+
+    def delete(self, order_id):
+        """Delete specific order to return 200 or 404"""
+        order = [order for order in ORDERS_DATA if order['id'] == order_id]
+        if order:
+            ORDERS_DATA.remove(order[0])
+            return {
+                "Message":
+                "Order with an ID = {} deleted".format(order_id)}, 200
+        return {
+            "Message":
+            "Order with an ID = {} does not exist".format(order_id)}, 404
