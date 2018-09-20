@@ -59,16 +59,13 @@ class OrderActivity(Resource):
 
     def put(self, order_id):
         """Update specific order to return appropriate status code"""
-
         order = [order for order in ORDERS_DATA if order["id"] == order_id]
         json_data = request.get_json(force=True, silent=True)
 
         if order:
             if json_data:
-                # if OrderItemsValodator(json_data["status"]).text_validator():
                 order[0]["status"] = json_data["status"]
                 return {"Message": "Order status updated"}, 200
-                # return {"Message": "Invalid order item"}, 400
             return {
                 "Message":
                 "You can not update an order with empty entries"}, 400

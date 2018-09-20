@@ -5,7 +5,7 @@ from flask_restful import Api
 
 # Local imports
 from instance.config import APP_CONFIG
-from .api.v1.views import Orders
+from .api.v1.views import Orders, OrderActivity
 
 # create api and blueprint objects
 api_blueprint = Blueprint("api", __name__)
@@ -23,6 +23,7 @@ def create_app(config_name):
 
     # add the api routes
     api.add_resource(Orders, "/orders")
+    api.add_resource(OrderActivity, "/orders/<int:order_id>")
 
     return app
 
