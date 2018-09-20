@@ -45,3 +45,14 @@ class Orders(Resource):
                 return {"Message": "Invalid order description"}, 400
             return {"Message": "Invalid order item"}, 400
         return {'Message': "You can not create empty order"}, 200
+
+
+class OrderActivity(Resource):
+    """Fetch, update and delete specific order by supplying order id"""
+    def get(self, order_id):
+        """Requesting a specific order otherwise return 404"""
+        order = [order for order in ORDERS_DATA if order["id"] == order_id]
+        if order:
+            return {"Order": order[0]}, 200
+        return {"Message":
+                "Order with ID = {} does not exist".format(order_id)}, 404
