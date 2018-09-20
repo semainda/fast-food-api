@@ -14,9 +14,14 @@ STATUS_CODE = 0  # received
 
 class Orders(Resource):
     """Class that creates orders and list all orders"""
+    def get(self):
+        """Orders requesting"""
+        if ORDERS_DATA:
+            return {"orders": ORDERS_DATA}, 200
+        return {"Message": "There is no order that exist"}, 404
 
     def post(self):
-        """Method for order creation"""
+        """Order creation"""
         json_data = request.get_json(force=True, silent=True)
 
         if json_data:
