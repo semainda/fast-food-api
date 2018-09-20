@@ -29,3 +29,16 @@ def test_request_orders_which_does_exist(test_client):
     """Test for requesting orders which does not exist to return 404"""
     response = test_client.get("/api/v1/orders")
     assert response.status_code == 200
+
+
+def test_request_valid_order(test_client):
+    """Test for requesting valid order to  return 200"""
+    response = test_client.get("/api/v1/orders/1")
+    assert response.status_code == 200
+
+
+def test_request_invalid_order(test_client):
+    """Tests for requesting order with invalid ID that does not exist
+    to return 404"""
+    response = test_client.get("/api/v1/orders/20")
+    response.status_code == 404
