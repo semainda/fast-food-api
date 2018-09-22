@@ -1,4 +1,7 @@
 language: python
+env:
+  APP_CONFIG="testing"
+
 python:
   - "3.6"
 
