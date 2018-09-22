@@ -10,7 +10,7 @@ install:
   - pipenv install
 
 script:
-  - pytest --cov-package=app app/tests --cov-report=html
+  - pytest --cov=app/tests --cov-report=html
 
 after_success:
   - coveralls
