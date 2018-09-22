@@ -1,6 +1,6 @@
 language: python
 env:
-  APP_CONFIG="testing"
+  APP_SETTINGS="testing"
 
 python:
   - "3.6"
