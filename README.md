@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.com/semainda/fast-food-api.svg?branch=ft-delete-order-%23160535015)](https://travis-ci.com/semainda/fast-food-api)
-[![Coverage Status](https://coveralls.io/repos/github/semainda/fast-food-api/badge.svg?branch=master)](https://coveralls.io/github/semainda/fast-food-api?branch=ft-delete-order-#160535015)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/24d19424862c6612cb7d/test_coverage)](https://codeclimate.com/github/semainda/fast-food-api/test_coverage)
 
-[![codecov](https://codecov.io/gh/semainda/fast-food-api/branch/ft-delete-order-#160535015/graph/badge.svg)](https://codecov.io/gh/semainda/fast-food-api)
 
 # fast-food-api
 API endpoints  for food delivery service app of a restaurant to fulfill the requirements of ADC 2. 
