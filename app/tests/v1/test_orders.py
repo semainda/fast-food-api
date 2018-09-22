@@ -55,12 +55,12 @@ def test_update_order(test_client, order_id, order_status, status_code):
     """Test for updating order with four posibilities
     to return appropriate status code"""
     response = test_client.put(
-        "/api/v1/orders/order_id", data=json.dumps(order_status))
+        "/api/v1/orders/" + str(order_id), data=json.dumps(order_status))
     assert response.status_code == status_code
 
 
 @pytest.mark.parametrize("order_id, status_code", [(1, 200), (3000, 404)])
 def test_delete_order(test_client, order_id, status_code):
     """Tests for deleting valid order to  return 200 or 404"""
-    response = test_client.delete("/api/v1/orders/order_id")
+    response = test_client.delete("/api/v1/orders/" + str(order_id))
     assert response.status_code == status_code
