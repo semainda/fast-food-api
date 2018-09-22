@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/semainda/fast-food-api.svg?branch=ft-delete-order-%23160535015)](https://travis-ci.com/semainda/fast-food-api)
-[![Coverage Status](https://coveralls.io/repos/github/semainda/fast-food-api/badge.svg?branch=master)](https://coveralls.io/github/semainda/fast-food-api?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/semainda/fast-food-api/badge.svg?branch=master)](https://coveralls.io/github/semainda/fast-food-api?branch=ft-delete-order-#160535015)
 
 # fast-food-api
 API endpoints  for food delivery service app of a restaurant to fulfill the requirements of ADC 2. 
