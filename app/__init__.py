@@ -5,7 +5,7 @@ from flask_restful import Api
 
 # Local imports
 from instance.config import APP_CONFIG
-from .api.v1.views import Orders, OrderActivity
+from .api.v1.views.orders import Orders, OrderActivity
 
 # create api and blueprint objects
 api_blueprint = Blueprint("api", __name__)
