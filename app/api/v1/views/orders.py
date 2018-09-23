@@ -7,8 +7,6 @@ from flask_restful import Resource
 # Local imports
 from ..models.models import ORDERS_DATA
 from ..utils.validators import OrderItemsValodator
-from ..responses.orders_responses import GetResponse,\
-    PostResponse, PutRespose, DeleteResponse
 
 DATE = datetime.now().strftime("%B %d, %Y")
 DEFAULT_STATUS_CODE = 3  # received
@@ -21,27 +19,41 @@ class Orders(Resource):
     def get(self):
         """Orders requesting"""
         if ORDERS_DATA:
-            return GetResponse(ORDERS_DATA).get_exist_orders_response()
-        return GetResponse().get_unexist_orders_response()
+            return {"Orders": ORDERS_DATA}, 200
+        return {
+            "Message": "Nothing Found",
+            "Description": "Orders not created yet",
+            "Status": "NOT FOUND"}, 404
 
     def post(self):
         """Order creation"""
-        response = PostResponse()
-        """def post_checker(data):
-            return data    
-
-        json_data = post_checker(request.get_json(force=True, silent=True))"""
-
         json_data = request.get_json(force=True, silent=True)
         if not json_data:
-            return response.post_order_with_empty_entries_response()
+            return {
+                "Message": "Empty Order Not Allowed",
+                "Description": "Order can not be created",
+                "Status": "NOT ALLOWED"}, 200
+
         if not OrderItemsValodator(json_data['item']).is_string_validator():
-            return response.post_order_with_invalid_item_type_and_value_response()
+            return {
+                "Message": "Invalid Order Item",
+                "Description": "Order can not be created",
+                "Status": "BAD REQUEST"}, 400
+
         if not OrderItemsValodator(
                 json_data['description']).is_string_validator():
-            return response.post_order_with_invalid_description_type_and_value_response()
+            return {
+                "Message": "Invalid Order Description",
+                "Description": "Order can not be created",
+                "Status": "BAD REQUEST"}, 400
+
         if not OrderItemsValodator(json_data['quantity']).is_int_validator():
-            return response.post_order_with_invalid_quantity_type_and_value_response()
+            return {
+                "Message": "Invalid Order Quantity",
+                "Description":
+                "Order with quantity value <= 0 or string can not be created",
+                "Status": "BAD REQUEST"}, 400
+
         ORDERS_DATA.append(
             dict(
                 id=len(ORDERS_DATA) + 1,
@@ -53,7 +65,10 @@ class Orders(Resource):
                 last_updated=DATE
             )
         )
-        return response.post_order_with_valid_entries_both_type_and_value_response()
+        return {
+            "Message": "Created",
+            "Description": "Order Successful Created",
+            "Status": "RECEIVED"}, 200
 
 
 class OrderActivity(Resource):
@@ -62,8 +77,13 @@ class OrderActivity(Resource):
         """Requesting a specific order otherwise return 404"""
         order = [order for order in ORDERS_DATA if order["id"] == order_id]
         if order:
-            return GetResponse(order[0]).get_order_with_valid_id_response()
-        return GetResponse(order_id).get_order_with_invalid_id_response()
+            return {
+                "Order": order[0]}, 200
+        return {
+            "Message": "Invalid Order ID",
+            "Description":
+            "Order with ID = {} does not exist".format(order_id),
+            "Status": "NOT FOUND"}, 404
 
     def put(self, order_id):
         """Update specific order to return appropriate status code"""
@@ -71,20 +91,56 @@ class OrderActivity(Resource):
         json_data = request.get_json(force=True, silent=True)
 
         if not order:
-            return PutRespose(order_id).put_order_with_invalid_id_response()
+            return {
+                "Message": "Invalid Order ID",
+                "Description":
+                "Order with ID = {} does not exist".format(order_id),
+                "Status": "NOT FOUND"}, 404
+
         if not json_data:
-            return PutRespose(order_id).put_order_with_empty_entries_response()
+            return {
+                "Message": "Empty Status Not Allowed",
+                "Description":
+                "Order with ID = {}, Status can not be updated"
+                .format(order_id),
+                "Status": "BAD REQUEST"}, 400
+
         if not OrderItemsValodator(json_data["status"]).is_string_validator():
-            return PutRespose(order_id).put_order_with_invalid_status_response()
+            return {
+                "Message": "Invalid Order Status",
+                "Description":
+                "Order with ID = {}, Status can not be updated"
+                .format(order_id),
+                "Status": "BAD REQUEST"}, 400
+
         if not json_data["status"] in [key for key in STATUS]:
-            return PutRespose(order_id).put_order_with_undefined_status_response()
+            return {
+                "Message": "Undefined Order Status",
+                "Description":
+                "Order with ID = {}, Status can not be updated"
+                .format(order_id),
+                "Status": "UNDEFINED"}
+
         order[0]["status"] = STATUS[json_data["status"]]
-        return PutRespose(order_id).put_order_with_valid_status_response()
+        return {
+            "Message": "Status Updated",
+            "Description":
+            "Order with ID = {}, Status updated".format(order_id),
+            "Status": "UPDATED"}, 200
 
     def delete(self, order_id):
         """Delete specific order to return 200 or 404"""
         order = [order for order in ORDERS_DATA if order['id'] == order_id]
         if order:
             ORDERS_DATA.remove(order[0])
-            return DeleteResponse(order_id).delete_order_with_valid_id_response()
-        return DeleteResponse(order_id).delete_order_with_invalid_id_response()
+            return {
+                "Message": "Order Deleted",
+                "Description":
+                "Order with ID = {} Deleted Successful".format(order_id),
+                "Status": "DELETED"}, 200
+
+        return {
+            "Message": "Invalid Order ID",
+            "Description":
+            "Order with ID = {} does not exist".format(order_id),
+            "Status": "NOT FOUND"}, 404
