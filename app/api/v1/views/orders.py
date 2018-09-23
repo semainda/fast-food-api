@@ -30,15 +30,12 @@ class Orders(Resource):
         if not json_data:
             return PostResponse().post_order_with_empty_entries_response()
         if not OrderItemsValodator(json_data['item']).is_string_validator():
-            return PostResponse().\
-                post_order_with_invalid_item_type_and_value_response()
+            return PostResponse().post_order_with_invalid_item_type_and_value_response()
         if not OrderItemsValodator(
                 json_data['description']).is_string_validator():
-            return PostResponse().\
-                post_order_with_invalid_description_type_and_value_response()
+            return PostResponse().post_order_with_invalid_description_type_and_value_response()
         if not OrderItemsValodator(json_data['quantity']).is_int_validator():
-            return PostResponse().\
-                post_order_with_invalid_quantity_type_and_value_response()
+            return PostResponse().post_order_with_invalid_quantity_type_and_value_response()
         ORDERS_DATA.append(
             dict(
                 id=len(ORDERS_DATA) + 1,
@@ -50,8 +47,7 @@ class Orders(Resource):
                 last_updated=DATE
             )
         )
-        return PostResponse().\
-            post_order_with_valid_entries_both_type_and_value_response()
+        return PostResponse().post_order_with_valid_entries_both_type_and_value_response()
 
 
 class OrderActivity(Resource):
@@ -71,24 +67,18 @@ class OrderActivity(Resource):
         if not order:
             return PutRespose(order_id).put_order_with_invalid_id_response()
         if not json_data:
-            return PutRespose(order_id).\
-                put_order_with_empty_entries_response()
+            return PutRespose(order_id).put_order_with_empty_entries_response()
         if not OrderItemsValodator(json_data["status"]).is_string_validator():
-            return PutRespose(order_id).\
-                put_order_with_invalid_status_response()
+            return PutRespose(order_id).put_order_with_invalid_status_response()
         if not json_data["status"] in [key for key in STATUS]:
-            return PutRespose(order_id).\
-                put_order_with_undefined_status_response()
+            return PutRespose(order_id).put_order_with_undefined_status_response()
         order[0]["status"] = STATUS[json_data["status"]]
-        return PutRespose(order_id).\
-            put_order_with_valid_status_response()
+        return PutRespose(order_id).put_order_with_valid_status_response()
 
     def delete(self, order_id):
         """Delete specific order to return 200 or 404"""
         order = [order for order in ORDERS_DATA if order['id'] == order_id]
         if order:
             ORDERS_DATA.remove(order[0])
-            return DeleteResponse(order_id).\
-                delete_order_with_valid_id_response()
-        return DeleteResponse(order_id).\
-            delete_order_with_invalid_id_response()
+            return DeleteResponse(order_id).delete_order_with_valid_id_response()
+        return DeleteResponse(order_id).delete_order_with_invalid_id_response()
