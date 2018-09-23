@@ -26,16 +26,22 @@ class Orders(Resource):
 
     def post(self):
         """Order creation"""
+        response = PostResponse()
+        """def post_checker(data):
+            return data    
+
+        json_data = post_checker(request.get_json(force=True, silent=True))"""
+
         json_data = request.get_json(force=True, silent=True)
         if not json_data:
-            return PostResponse().post_order_with_empty_entries_response()
+            return response.post_order_with_empty_entries_response()
         if not OrderItemsValodator(json_data['item']).is_string_validator():
-            return PostResponse().post_order_with_invalid_item_type_and_value_response()
+            return response.post_order_with_invalid_item_type_and_value_response()
         if not OrderItemsValodator(
                 json_data['description']).is_string_validator():
-            return PostResponse().post_order_with_invalid_description_type_and_value_response()
+            return response.post_order_with_invalid_description_type_and_value_response()
         if not OrderItemsValodator(json_data['quantity']).is_int_validator():
-            return PostResponse().post_order_with_invalid_quantity_type_and_value_response()
+            return response.post_order_with_invalid_quantity_type_and_value_response()
         ORDERS_DATA.append(
             dict(
                 id=len(ORDERS_DATA) + 1,
@@ -47,7 +53,7 @@ class Orders(Resource):
                 last_updated=DATE
             )
         )
-        return PostResponse().post_order_with_valid_entries_both_type_and_value_response()
+        return response.post_order_with_valid_entries_both_type_and_value_response()
 
 
 class OrderActivity(Resource):
