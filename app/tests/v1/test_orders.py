@@ -15,7 +15,7 @@ def test_request_orders_which_does_not_exist(test_client):
         (dict(), 200),
         (dict(item=20), 400),
         (dict(item="Chicken", description=40), 400),
-        (dict(item="Chicken", description="Saved with soup", quantity=2), 201)
+        (dict(item="Chicken", description="Saved with soup", quantity=2), 200)
         ]
     )
 def test_create_order(test_client, new_order, status_code):
@@ -46,9 +46,10 @@ def test_request_valid_order(test_client):
 
 @pytest.mark.parametrize(
     "order_id, order_status, status_code", [
-        (3000, dict(), 404),
+        ("andela", dict(), 404),
         (1, dict(), 400),
-        (1, dict(status=1), 200)
+        (1, dict(status="Accepted"), 200),
+        (1, dict(status="Done"), 200)
         ]
     )
 def test_update_order(test_client, order_id, order_status, status_code):
