@@ -6,7 +6,7 @@ import pytest
 # Local imports
 from app import create_app
 
-TEST_CONFIG = os.getenv('TEST_CONFIG')
+CONFIG = os.getenv('APP_SETTINGS')
 
 
 @pytest.fixture
@@ -15,7 +15,7 @@ def test_client():
     acquare some resources before tests runs
     and release them when testing is done"""
     # setup
-    app = create_app(TEST_CONFIG)
+    app = create_app(CONFIG)
     testing_client = app.test_client()
 
     # stop the flow and passes control to the tests

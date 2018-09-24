@@ -1,0 +1,17 @@
+language: python
+env:
+  APP_SETTINGS="testing"
+
+python:
+  - "3.6"
+
+install:
+  - pip install pipenv
+  - pipenv install
+
+script:
+  - pytest --cov=app/tests --cov-report=html
+
+after_success:
+  - coveralls
+  - codecov --token=31be0875-48ba-4884-9a8a-616f51b6cb6f
