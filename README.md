@@ -23,51 +23,46 @@ This is an api application compaises of several end points for a food delivery s
 
 ### Installation
 
-#### Step 1
-
-Create a project directory
+#### Step 1: Create a project directory
 
 ```$ mkdir fast-food-api```
 
 ```$ cd fast-food-api```
 
-Created virtual enviroment
+#### Step 2: Created virtual enviroment
 
 ```$ apt get install pipenv```
 
 ```$ pipenv --python 3.6```
 
-Activate the virtual envinment
+#### Step 3: Activate the virtual envinment
 
 ```$ pipenv shell```
 
-Clone the fast-food-api repository [```here```](https://github.com/semainda/fast-food-api) or ```git clone https://github.com/semainda/fast-food-api```
+#### Step 4: Clone the fast-food-api repository
 
-Install project dependances
+[```here```](https://github.com/semainda/fast-food-api) or ```git clone https://github.com/semainda/fast-food-api```
+
+
+#### Step 5: Install project dependances
 
 ```$ pipenv install```
 
-#### Step 2
+### Exporting environment variable
 
-##### Exporting environment variable
-
-For development purposes
+#### For development purposes
 
 ```$ export APP_SETTINGS = "development"```
 
-For testing purposes
+#### For testing purposes
 
 ```$ export APP_SETTINGS = "testing"```
 
-#### Step 3
-
-##### Running the application
+### Running the application
 
 ```$ python run.py```
 
-#### Step 4
-
-##### Running the Tests
+### Running the Tests
 
 ```$ pytest app/tests"```
 
