@@ -58,7 +58,7 @@ class OrderActivity(Resource):
         """Requesting a specific order otherwise return 404"""
         order = [order for order in ORDERS_DATA if order["id"] == order_id]
         if order:
-            return GetResponse().get_order_with_valid_id_response()
+            return GetResponse(order).get_order_with_valid_id_response()
         return GetResponse(order_id).get_order_with_invalid_id_response()
 
     def put(self, order_id):

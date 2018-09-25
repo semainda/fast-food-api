@@ -9,7 +9,7 @@ def order_str_data_validator(**kwargs):
         if not re.fullmatch(r"^[a-zA-Z ]+$", str(kwargs[key])) and isinstance(kwargs[key], str):
             validation_output = False, key
             break
-        validation_output = True,
+        validation_output = (True,)
     return validation_output
 
 def order_int_data_validator(qty):
