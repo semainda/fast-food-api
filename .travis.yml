@@ -8,6 +8,7 @@ python:
 install:
   - pip install pipenv
   - pipenv install
+  - pipenv install coveralls
 
 script:
   - pytest --cov=app/tests --cov-report=html
