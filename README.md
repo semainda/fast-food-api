@@ -6,6 +6,7 @@ This is an api application compaises of several end points for a food delivery s
 
 [![Build Status](https://travis-ci.com/semainda/fast-food-api.svg?branch=ft-delete-order-%23160535015)](https://travis-ci.com/semainda/fast-food-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/24d19424862c6612cb7d/maintainability)](https://codeclimate.com/github/semainda/fast-food-api/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/semainda/fast-food-api/badge.svg)](https://coveralls.io/github/semainda/fast-food-api)
 
 ## Run in Postman
 
