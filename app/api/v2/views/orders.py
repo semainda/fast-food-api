@@ -69,9 +69,9 @@ class CategoriesActivity(Resource):
                 return orders_responses.resource_success_response()
             return orders_responses.resource_does_not_exist_response()
         return orders_responses.resource_with_invalid_entries_response()
-    
+
     def delete(self, cat_id):
-         """Method quering the database to delete one category"""
+        """Method quering the database to delete one category"""
         cat_ids = [cat_id[0] for cat_id in categories]
         if cat_id in cat_ids:
             CategoriesModel().delete_category(cat_id)
