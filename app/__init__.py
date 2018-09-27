@@ -5,7 +5,8 @@ from flask_restful import Api
 
 # Local imports
 from instance.config import APP_CONFIG
-from .api.v1.views.orders import Orders, OrderActivity
+from .api.v2.views.orders import Categories
+
 
 # create api and blueprint objects
 api_blueprint = Blueprint("api", __name__)
@@ -18,12 +19,16 @@ def create_app(config_name):
     app.config.from_object(APP_CONFIG[config_name])
     app.config.from_pyfile('config.py')
 
+    #create_dev_db_tables()
+
     # blueprint registration
-    app.register_blueprint(api_blueprint, url_prefix="/api/v1")
+    app.register_blueprint(api_blueprint, url_prefix="/api/v2")
 
     # add the api routes
-    api.add_resource(Orders, "/orders")
-    api.add_resource(OrderActivity, "/orders/<int:order_id>")
+    # api.add_resource(Orders, "/orders")
+    # api.add_resource(OrderActivity, "/orders/<int:order_id>")
+    # menu categories endpoints
+    api.add_resource(Categories, "/menu/categories")
 
     return app
 
