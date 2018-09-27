@@ -1,21 +1,27 @@
 """This module contains all of our application environment"""
+import os
+
+class Config:
+    DEBUG = False
+    DATABASE_URL = os.getenv("DATABASE_URL")
 
 
-class DevelopmentConfig:
+class DevelopmentConfig(Config):
     """Defining configurations required for development purpose"""
     DEBUG = True
 
 
-class TestingConfig:
+class TestingConfig(Config):
     """Defining configurations required for testing purpose"""
     DEBUG = True
     TESTING = True
+    DATABASE_URL = os.getenv("TEST_DATABASE_URL")
 
 
-class ProductionConfig:
+class ProductionConfig(Config):
     """Defining configurations required for production purpose"""
     DEBUG = False
-    TESTING = True
+    TESTING = False
 
 
 APP_CONFIG = {
