@@ -13,7 +13,11 @@ from ..models.categories import CategoriesModel
 categories = CategoriesModel().get_all_categories()
 
 class Categories(Resource):
-  
+    def get(self):
+        if categories:
+            return orders_responses.return_resources_response(categories, "Categories")
+        return orders_responses.resource_does_not_exist_response()
+
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument("category", required=True, help="Menu category can't be empty")
