@@ -13,11 +13,18 @@ This is an api application compaises of several end points for a food delivery s
 
 ## Features Included
 
-1. Create order
-2. View a list of all orders
-3. View a specific order
-4. Updated a specific order
-5. Delete a specific order
+1. Register a user
+2. Login a user
+3. Place an order for food
+4. Get order history for a perticular user
+5. Get all orders
+6. Add a specific order
+7. Update the status of an order
+8. Add menu category
+9. Update a specific menu category
+10. Delete a specific menu category
+11. Get available menu
+12. Add meal option to the menu
 
 ## Prerequisite
 
@@ -66,12 +73,27 @@ This is an api application compaises of several end points for a food delivery s
 
 ```$ pytest app/tests"```
 
-## API - Endpoints: /api/v1/
+## Users API - Endpoints: /api/v2/
 
 Method | Endpoint | Functionality
 ----| ---- | ---
-POST | /orders | Create order
-GET  | /orders | View a list of all orders
-GET  | /orders/int:order_id | View a specific order
-PUT  | /orders/int:order_id | Updated a specific order
-DELETE | Updated a specific order | Delete a specific order
+POST | /auth/signup | Register a user
+POST  | /auth/login | Login a user
+POST  | /auth/logout | Sign out a user
+
+## Orders API - Endpoints: /api/v2/
+
+Method | Endpoint | Functionality
+----| ---- | ---
+POST | users/orders | Place and order for food
+GET  | users/orders | Get the order history for a perticular user
+GET  | /orders/ | Get all orders
+GET  | /orders/order_id | Add a specific order
+PUT  | /orders/order_id | Updated the status of an order
+GET  |  /menu | Get available menu
+POST | /menu  | Add a meal option to the menu
+POST | /menu/categories/ | Add a menu category
+GET  | /menu/categories | Get all categories
+GET  | /menu/categories/cat_id | Get a specific category
+PUT  |/menu/categories/cat_id | Update a specific category
+DELETE  |/menu/categories/cat_id | Delete a specific category
