@@ -7,22 +7,29 @@ from flask_restful import Resource, reqparse
 from ..utils import post_validators
 from ..responses import orders_responses
 
-## models imports
+# models imports
 from ..models.categories import CategoriesModel
 
 categories = CategoriesModel().get_all_categories()
 
+
 class Categories(Resource):
+    """Class for post and get categories"""
     def get(self):
+        """Method to query the database and return all categories"""
         if categories:
-            return orders_responses.return_resources_response(categories, "Categories")
+            return orders_responses.return_resources_response(
+                categories, "Categories")
         return orders_responses.resource_does_not_exist_response()
 
     def post(self):
+        """Method querying the database to create category"""
         parser = reqparse.RequestParser()
-        parser.add_argument("category", required=True, help="Menu category can't be empty")
+        parser.add_argument(
+            "category", required=True,
+            help="Menu category can't be empty")
         data_parsed = parser.parse_args()
-        category = data_parsed["category"]     
+        category = data_parsed["category"]
         output = post_validators.order_str_data_validator(category=category)
         if output:
             if categories:
