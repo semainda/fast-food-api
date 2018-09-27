@@ -41,3 +41,12 @@ class Categories(Resource):
             CategoriesModel().post_category(category)
             return orders_responses.resource_success_response()
         return orders_responses.resource_with_invalid_entries_response()
+
+
+class CategoriesActivity(Resource):
+    def get(self, cat_id):
+        """Method quering the database and return one category"""
+        cat_ids = [cat_id[0] for cat_id in categories]
+        if cat_id in cat_ids:
+            return orders_responses.return_single_resource_response(CategoriesModel().get_category(cat_id), "Category")
+        return orders_responses.resource_does_not_exist_response()
