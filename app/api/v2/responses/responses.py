@@ -3,26 +3,22 @@
 
 def resource_does_not_exist_response():
     """Method for resouce not found responce"""
-    return {"Message": "Resource not found"}, 404
+    return {"Message": "The requested resource does not exist"}, 404
 
 
-def return_resources_response(resource, key):
+def return_resources_response(resource):
     """Method for return responce"""
-    return {key:resource}, 200
-
-
-def return_single_resource_response(resource, key):
-    return {key: resource}, 200
+    return resource, 200
 
 
 def resource_already_exist_response():
     """Method for exist response """
-    return {"Message": "Resouce already exist"}, 200
+    return {"Message": "The resource already exist"}, 200
 
 
 def resource_with_empty_entries_response():
     """Method for post empty order response"""
-    return {"Message": "Empty resources are not allowed"}, 200
+    return {"Message": "Create empty resources is not allowed"}, 200
 
 
 def resource_with_invalid_entries_response():
