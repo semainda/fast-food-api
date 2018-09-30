@@ -18,15 +18,7 @@ class BaseModel:
                 curr.execute(query, val)
                 rows = curr.fetchall()
         self.conn.close()
-        data_items = []
-        for _, items in enumerate(rows):
-            cat_id, cat_name = items
-            category = dict(
-                cat_id=cat_id,
-                cat_name=cat_name
-                )
-            data_items.append(category)
-        return data_items
+        return rows
 
     def cud_operations(self, query=None, val=None):
         """
