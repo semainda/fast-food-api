@@ -1,7 +1,7 @@
 """Module that creates category model"""
 # local imports
-# from app.db_config.db_setups import DatabaseOperations
 from ..models import BaseModel
+
 
 class Category(BaseModel):
     """
@@ -12,14 +12,13 @@ class Category(BaseModel):
         category name
     """
     def __init__(self):
-        # self.conn = DatabaseOperations().db_con()
         super().__init__()
 
     def create_category(self, cat_name):
         """Method that create category"""
         sql = "INSERT INTO categories(cat_name) VALUES(%s) RETURNING cat_id;"
         return self.cud_operations(sql, (cat_name, ))
-    
+
     def get_category_by_id(self, cat_id):
         """Method that returns a specific category"""
         sql = "SELECT cat_name FROM categories WHERE cat_id=%s;"
@@ -37,7 +36,8 @@ class Category(BaseModel):
 
     def update_category(self, cat_name, cat_id):
         """Method that update specific category"""
-        sql = "UPDATE categories SET cat_name=(%s) WHERE cat_id=(%s) RETURNING cat_id;"
+        sql = "UPDATE categories SET cat_name=(%s)\
+            WHERE cat_id=(%s) RETURNING cat_id;"
         return self.cud_operations(sql, (cat_name, cat_id))
 
     def delete_category(self, cat_id):
