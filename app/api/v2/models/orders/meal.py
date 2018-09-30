@@ -5,22 +5,21 @@ from ..models import BaseModel
 
 class Meal(BaseModel):
     """This class methods for meals endpoints"""
-    def __init__(
-            self, meal_name="text", cat_id=0, description="desc", price=0):
-        self.meal_name = meal_name
-        self.cat_id = cat_id
-        self.description = description
-        self.price = price
+    def __init__(self):
         super().__init__()
 
-    def create_meal(self):
+    def create_meal(self, meal_name, cat_id, description, price):
         """Method that creates meal"""
         sql = """INSERT INTO meals(meal_name, cat_id, description, price)
-        VALUES(%s, %s, %s, %s);"""
-        self.cud_operations(sql, (
-            self.meal_name,
-            self.cat_id, self.description,
-            self.price))
+        VALUES(%s, %s, %s, %s) RETURNING meal_id;"""
+        return self.cud_operations(sql, (
+            meal_name, cat_id, description, price))
+        
+    def get_meal_by_name(self, meal_name):
+        """Method that returns existing meal name"""
+        sql = "SELECT meal_name FROM meals WHERE meal_name=%s;"
+        return self.cud_operations(sql, (meal_name,))
+        
 
         """"def get_all_meals(self):
             Method for get all meals
