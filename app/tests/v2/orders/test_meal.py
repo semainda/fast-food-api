@@ -90,15 +90,18 @@ def test_get_meals_with_invalid_url(test_client):
     response = test_client.get("/api/v2/menu/")
     assert response.status_code == 404
 
+
 def test_update_meals_with_invalid_url(test_client):
-    "Function that tests update category with invalid url"
+    "Function that tests update meal with invalid url"
     response = test_client.put("/api/v2/menu")
     assert response.status_code == 405
 
+
 def test_update_meals_with_url_only(test_client):
-    "Function that tests update category with url only"
+    "Function that tests update meal with url only"
     response = test_client.put("/api/v2/menu/categories/")
     assert response.status_code == 404
+
 
 update_cases = [
     (dict(
@@ -148,12 +151,40 @@ update_cases = [
         description="Saved with soup",
         price=500), 2, 404),
     (dict(), 1, 400),
-    ("", 2,400)
+    ("", 2, 400)
 ]
+
+
 @pytest.mark.parametrize("meal, meal_id, status_code", update_cases)
 def test_update_category(test_client, meal, meal_id, status_code):
-    "Function that tests update category with diffent cases"
+    "Function that tests update meal with diffent cases"
     response = test_client.put(
         "/api/v2/menu/" + str(meal_id), data=json.dumps(meal),
         headers={"content-type": "application/json"})
     assert response.status_code == status_code
+
+
+delete_cases = [
+    (1, 404),
+    (3000, 404),
+    ("a", 404)
+]
+
+
+@pytest.mark.parametrize("meal_id, status_code", delete_cases)
+def test_delete_meal(test_client, meal_id, status_code):
+    "Function that tests delete meal with diffent cases"
+    response = test_client.delete("/api/v2/menu/" + str(meal_id))
+    assert response.status_code == status_code
+
+
+def test_delete_meal_with_get_url(test_client):
+    "Function that tests delete meal with url for get"
+    response = test_client.delete("/api/v2/menu")
+    assert response.status_code == 405
+
+
+def test_delete_meal_without_meal_id(test_client):
+    "Function that tests delete meal with url missing meal_id"
+    response = test_client.delete("/api/v2/menu/")
+    assert response.status_code == 404
