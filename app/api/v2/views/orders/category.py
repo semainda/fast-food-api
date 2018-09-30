@@ -15,7 +15,7 @@ class Categories(Resource):
         """Method that  gets resources"""
         categories = Category().get_all_categories()
         if categories:
-            return responses.return_resources_response(categories)
+            return categories, 200
         return responses.resource_does_not_exist_response()
 
     def post(self):
@@ -43,7 +43,7 @@ class CategoriesActivity(Resource):
         """Method that get a particular resource"""
         category = Category().get_category_by_id(cat_id)
         if category:
-            return responses.return_resources_response(category)
+            return {"Name": category[0].upper()}, 200
         return responses.resource_does_not_exist_response()
 
     def put(self, cat_id):
