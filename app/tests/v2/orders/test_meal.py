@@ -4,7 +4,7 @@ import json
 import pytest
 
 meal_data_cases = [
-    (dict(meal="Wali", category="BBQ Chicken", description="Saved with soup", price=500), 200),
+    (dict(meal="Wali", category="BBQ Chicken", description="Saved with soup", price=500), 404),
     (dict(category="BBQ Chicken", description="Saved with soup", price=500), 400),
     (dict(meal="Wali",description="Saved with soup", price=500), 400),
     (dict(meal="Wali", category="BBQ Chicken", price=500), 400),
@@ -13,7 +13,7 @@ meal_data_cases = [
     (dict(meal="Wali", category=40, description="Saved with soup", price=500), 400),
     (dict(meal="Wali", category="BBQ Chicken", description="&%Saved with soup", price=500), 400),
     (dict(meal="Wali", category="BBQ Chicken", description="Saved with soup", price=0), 400),
-    (dict(meal="Wali", category="BBQ Chicken", description="Saved with soup", price=500), 200),
+    (dict(meal="Wali", category="BBQ Chicken", description="Saved with soup", price=500), 404),
     (dict(), 400),
     ("", 400)
 ]
