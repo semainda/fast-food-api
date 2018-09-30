@@ -5,7 +5,7 @@ from flask_restful import Api
 
 # Local imports
 from instance.config import APP_CONFIG
-from .api.v2.views.orders import Categories, CategoriesActivity
+from .api.v2.views.orders import Categories, CategoriesActivity, Meals
 
 
 # create api and blueprint objects
@@ -30,6 +30,7 @@ def create_app(config_name):
     # menu categories endpoints
     api.add_resource(Categories, "/menu/categories")
     api.add_resource(CategoriesActivity, "/menu/categories/<int:cat_id>")
+    api.add_resource(Meals, "/menu")
 
     return app
 

@@ -9,6 +9,9 @@ from ..responses import orders_responses
 
 # models imports
 from ..models.categories import CategoriesModel
+from ..models.meals import MealsModel
+
+# Categories
 
 categories = CategoriesModel().get_all_categories()
 
@@ -77,3 +80,51 @@ class CategoriesActivity(Resource):
             CategoriesModel().delete_category(cat_id)
             return orders_responses.resource_success_response()
         return orders_responses.resource_does_not_exist_response()
+
+
+# Meals
+
+meals = MealsModel().get_all_meals()
+
+
+class Meals(Resource):
+    """Class for post and get categories"""
+  
+    def post(self):
+        """Method querying the database to create menu"""  meal_name, cat_id, description, price
+        parser = reqparse.RequestParser()
+        parser.add_argument(
+            "meal", required=True,
+            help="Meal can't be empty")
+        parser.add_argument(
+            "cat_id", required=True,
+            help="Category can't be empty")
+        parser.add_argument(
+            "description", required=True,
+            help="Description can't be empty")
+        parser.add_argument(
+            "price", required=True,
+            help="Price can't be empty")
+        data_parsed = parser.parse_args()
+        meal = data_parsed["meal"]
+        category = data_parsed["cat_id"]
+        description = data_parsed["description"]
+        price = data_parsed["price"]
+
+        valid_str = post_validators.order_str_data_validator(meal=meal, description=description, price=price)
+        valid_int = post_validators.order_int_data_validator(category=category, price=price)
+
+        if valid_str:
+            if valid_int:
+                meal_cat = CategoriesModel().get_category(category)
+                if meal_cat:
+                    if meals:
+                        meal_names = [meal_name[1] for meal_name in meals]
+                        if meal in meals_names:
+                            return orders_responses.resource_already_exist_response()
+                        MealsModel().post_meal(meal)
+                        return orders_responses.resource_success_response()
+                    MealsModel().post_meal(meal)
+                return orders_responses.resource_does_not_exist_response()
+            return orders_responses.resource_with_invalid_entries_response()
+        return orders_responses.resource_with_invalid_entries_response()

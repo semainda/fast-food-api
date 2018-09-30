@@ -32,7 +32,7 @@ class CategoriesModel:
         sql = "SELECT cat_name FROM categories WHERE cat_id=%s;"
         cursor = conn.cursor()
         cursor.execute(sql, (cat_id,))
-        data = cursor.fetchone()
+        data = cursor.fetchone()[0]
         cursor.close()
         return data
         
