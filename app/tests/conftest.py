@@ -8,7 +8,7 @@ from app import create_app
 from ..db_config.db_setups import DatabaseOperations
 # from app.db_setups import create_db_tables, destroy_db_tables
 
-TEST_CONFIG = os.getenv("TEST_ENV")
+TEST_CONFIG = os.getenv("ENV_CONFIG")
 
 @pytest.fixture(scope="session")
 def test_client():
