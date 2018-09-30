@@ -23,9 +23,9 @@ def test_client():
     # stop the flow and passes control to the tests
     yield testing_client
     # pick up here when tests are done
-    with app.app_context():
-        db = DatabaseOperations()
-        conn = db.destroy_db_tables(app.config["DATABASE_URL"])
-        conn.close()
+    #with app.app_context():
+        #db = DatabaseOperations()
+        #conn = db.destroy_db_tables(app.config["DATABASE_URL"])
+        #conn.close()
         
 
