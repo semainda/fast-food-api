@@ -19,13 +19,13 @@ categories = """CREATE TABLE IF NOT EXISTS categories(
 meals = """CREATE TABLE IF NOT EXISTS meals(
                     meal_id serial PRIMARY KEY,
                     meal_name varchar(50) NOT NULL,
-                    cat_id int REFERENCES categories(cat_id),
+                    cat_id int REFERENCES categories(cat_id) ON DELETE CASCADE ON UPDATE CASCADE,
                     description varchar(80) NOT NULL,
                     price  int  NOT NULL);"""
 
 orders = """CREATE TABLE IF NOT EXISTS orders(
                     order_id serial PRIMARY KEY,
-                    user_id int REFERENCES users(user_id) ON DELETE CASCADE,
+                    user_id int REFERENCES users(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
                     status int DEFAULT 0,
                     delivery_address text,
                     created_date date NOT NULL);"""
