@@ -26,7 +26,7 @@ class Categories(Resource):
             required=True,
             help="category keyword not found")
         data_parsed = parser.parse_args()
-        category = data_parsed["category"]
+        category = data_parsed["category"].lower()
 
         is_valid = input_validators(category=category)
         if is_valid:
