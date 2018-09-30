@@ -6,11 +6,6 @@ def resource_does_not_exist_response():
     return {"Message": "The requested resource does not exist"}, 404
 
 
-def return_resources_response(resource):
-    """Method for return responce"""
-    return resource, 200
-
-
 def resource_already_exist_response():
     """Method for exist response """
     return {"Message": "The resource already exist"}, 200
