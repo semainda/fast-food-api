@@ -32,7 +32,16 @@ class Category(BaseModel):
     def get_all_categories(self):
         """Method that returns a list of categories"""
         sql = "SELECT * FROM categories;"
-        return self.read_items(sql)
+        rows = self.read_items(sql)
+        categories = []
+        for _, items in enumerate(rows):
+            cat_id, cat_name = items
+            category = dict(
+                Id=cat_id,
+                Name=cat_name.upper()
+            )
+            categories.append(category)
+        return categories
 
     def update_category(self, cat_name, cat_id):
         """Method that update specific category"""

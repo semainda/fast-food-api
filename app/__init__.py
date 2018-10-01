@@ -6,7 +6,7 @@ from flask_restful import Api
 # Local imports
 from instance.config import APP_ENV_CONFIG
 from .api.v2.views.orders.category import Categories, CategoriesActivity
-from .api.v2.views.orders.meal import Meals
+from .api.v2.views.orders.meal import Meals, MealsActivity
 from .db_config.db_setups import DatabaseOperations
 
 
@@ -33,3 +33,4 @@ def create_app(config_key):
 api.add_resource(Categories, "/menu/categories")
 api.add_resource(CategoriesActivity, "/menu/categories/<int:cat_id>")
 api.add_resource(Meals, "/menu")
+api.add_resource(MealsActivity, "/menu/<int:meal_id>")
