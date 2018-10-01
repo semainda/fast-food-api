@@ -26,7 +26,7 @@ class Category(BaseModel):
 
     def get_category_by_name(self, cat_name):
         """Method that returns a specific category"""
-        sql = "SELECT cat_name FROM categories WHERE cat_name=%s;"
+        sql = "SELECT cat_id FROM categories WHERE cat_name=%s;"
         return self.cud_operations(sql, (cat_name,))
 
     def get_all_categories(self):
@@ -44,3 +44,4 @@ class Category(BaseModel):
         """Method that delete specific category"""
         sql = "DELETE FROM categories WHERE cat_id=(%s) RETURNING cat_id;"
         return self.cud_operations(sql, (cat_id,))
+

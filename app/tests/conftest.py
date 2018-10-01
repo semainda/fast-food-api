@@ -10,7 +10,7 @@ from ..db_config.db_setups import DatabaseOperations
 
 TEST_CONFIG = os.getenv("ENV_CONFIG")
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def test_client():
     """This function is used to initialize setting,
     acquare some resources before tests runs

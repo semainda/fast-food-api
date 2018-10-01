@@ -20,20 +20,20 @@ def test_create_category(test_client, category, status_code):
         data=json.dumps(category),
         headers={"content-type": "application/json"}
         )
-    response.status_code == status_code
+    assert response.status_code == status_code
 
 def test_request_unexist_category(test_client):
     "Function that tests request unexist category"
     response = test_client.get("/api/v2/menu/categories")
-    response.status_code = 404
+    assert response.status_code == 200
 
 def test_request_exist_category(test_client):
     "Function that tests request exist category"
-    response = test_client.get("/api/v2/menu/category")
-    response.status_code == 200
+    response = test_client.get("/api/v2/menu/categories")
+    assert response.status_code == 200
 
 get_cases = [
-    ("", 400),
+    ("", 404),
     ("a", 404),
     (1, 200),
     (3000, 404)
@@ -42,7 +42,7 @@ get_cases = [
 def test_request_specific_category(test_client, cat_id, status_code):
     "Function that tests request specific category by id with diffent cases"
     response = test_client.get("api/v2/menu/categories/" + str(cat_id))
-    response.status_code == status_code
+    assert response.status_code == status_code
 
 def test_update_category_with_invalid_url(test_client):
     "Function that tests update category with invalid url"
