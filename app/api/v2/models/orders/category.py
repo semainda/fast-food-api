@@ -51,6 +51,5 @@ class Category(BaseModel):
 
     def delete_category(self, cat_id):
         """Method that delete specific category"""
-        sql = "DELETE FROM categories WHERE cat_id=(%s) RETURNING cat_id CASCADES;"
+        sql = "DELETE FROM categories WHERE cat_id=(%s) RETURNING cat_id CASCADE;"
         return self.cud_operations(sql, (cat_id,))
-
