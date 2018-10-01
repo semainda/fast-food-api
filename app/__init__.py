@@ -7,6 +7,7 @@ from flask_restful import Api
 from instance.config import APP_ENV_CONFIG
 from .api.v2.views.orders.category import Categories, CategoriesActivity
 from .api.v2.views.orders.meal import Meals, MealsActivity
+from .api.v2.views.users.user import Users, UsersActivity
 from .db_config.db_setups import DatabaseOperations
 
 
@@ -29,8 +30,15 @@ def create_app(config_key):
     
     return app
 
-# add the api routes
+# add categories api routes
 api.add_resource(Categories, "/menu/categories")
 api.add_resource(CategoriesActivity, "/menu/categories/<int:cat_id>")
+
+# add meals api routes
 api.add_resource(Meals, "/menu")
 api.add_resource(MealsActivity, "/menu/<int:meal_id>")
+
+# add users api routes
+api.add_resource(Users, "/users")
+api.add_resource(UsersActivity, "/users/<int:user_id>")
+
