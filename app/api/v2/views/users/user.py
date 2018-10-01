@@ -13,7 +13,10 @@ class Users(Resource):
     """Class that creates post and get endpoints"""
     def get(self):
         """Method that  gets resources"""
-        pass
+        users = User().get_all_users()
+        if users:
+            return users, 200
+        return responses.resource_does_not_exist_response()
 
     def post(self):
         """Method that creates users"""
