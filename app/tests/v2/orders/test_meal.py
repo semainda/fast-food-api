@@ -89,3 +89,71 @@ def test_get_meals_with_invalid_url(test_client):
     """Function that test requecting meal without meal_id"""
     response = test_client.get("/api/v2/menu/")
     assert response.status_code == 404
+
+def test_update_meals_with_invalid_url(test_client):
+    "Function that tests update category with invalid url"
+    response = test_client.put("/api/v2/menu")
+    assert response.status_code == 405
+
+def test_update_meals_with_url_only(test_client):
+    "Function that tests update category with url only"
+    response = test_client.put("/api/v2/menu/categories/")
+    assert response.status_code == 404
+
+update_cases = [
+    (dict(
+        meal="Wali",
+        category="BBQ Chicken",
+        description="Saved with soup",
+        price=500), 1, 404),
+    (dict(
+        category="BBQ Chicken",
+        description="Saved with soup",
+        price=500), 2, 400),
+    (dict(
+        meal="Wali",
+        description="Saved with soup",
+        price=500), 1, 400),
+    (dict(
+        meal="Wali",
+        category="BBQ Chicken",
+        price=500), 2, 400),
+    (dict(
+        meal="Wali",
+        category="BBQ Chicken",
+        description="Saved with soup"), 1, 400),
+    (dict(
+        meal=400,
+        category="BBQ Chicken",
+        description="Saved with soup",
+        price=500), 3, 400),
+    (dict(
+        meal="Wali",
+        category=40,
+        description="Saved with soup",
+        price=500), 1, 400),
+    (dict(
+        meal="Wali",
+        category="BBQ Chicken",
+        description="&%Saved with soup",
+        price=500), 1, 400),
+    (dict(
+        meal="Wali",
+        category="BBQ Chicken",
+        description="Saved with soup",
+        price=0), 1, 400),
+    (dict(
+        meal="Wali",
+        category="BBQ Chicken",
+        description="Saved with soup",
+        price=500), 2, 404),
+    (dict(), 1, 400),
+    ("", 2,400)
+]
+@pytest.mark.parametrize("meal, meal_id, status_code", update_cases)
+def test_update_category(test_client, meal, meal_id, status_code):
+    "Function that tests update category with diffent cases"
+    response = test_client.put(
+        "/api/v2/menu/" + str(meal_id), data=json.dumps(meal),
+        headers={"content-type": "application/json"})
+    assert response.status_code == status_code
