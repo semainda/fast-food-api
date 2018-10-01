@@ -72,7 +72,6 @@ celerybeat-schedule
 
 # Environments
 .vscode
-.env
 .venv
 env/
 venv/

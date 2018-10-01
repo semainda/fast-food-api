@@ -6,7 +6,7 @@ import os
 from app import create_app
 
 # Create enviroment that our app will use in the running process
-CONFIG = os.getenv("APP_SETTINGS")
+CONFIG = os.getenv("ENV_CONFIG")
 
 app = create_app(CONFIG)
 
