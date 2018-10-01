@@ -44,3 +44,13 @@ class User(BaseModel):
             )
             users_list.append(accounts)
         return users_list
+
+    def get_user_by_user_id(self, user_id):
+        """Method for get a specific user"""
+        sql = "SELECT * FROM users WHERE user_id=%s;"
+        return self.cud_operations(sql, (user_id,))
+
+    def get_user_by_user_name_email(self, user_name, email):
+        """Method for get a specific user"""
+        sql = "SELECT user_name, email FROM users WHERE user_name=%s OR email=%s;"
+        return self.cud_operations(sql, (user_name, email))
