@@ -21,3 +21,26 @@ class User(BaseModel):
                 first_name, last_name,
                 email, user_name, password,
                 self.created_date))
+
+    def get_all_users(self):
+        """Method that gets all users"""
+        sql = "SELECT * FROM users;"
+        rows = self.read_items(sql)
+        users_list = []
+        for _, users in enumerate(rows):
+            user_id, first_name, last_name,\
+                email, user_name, user_role, authenticated,\
+                password, created_date = users
+            accounts = dict(
+                Id=user_id,
+                First_name=first_name.upper(),
+                Last_name=last_name.upper(),
+                Email=email,
+                User_name=user_name,
+                User_role=user_role,
+                Authenticated=authenticated,
+                Password=password,
+                Created_date=str(created_date)
+            )
+            users_list.append(accounts)
+        return users_list
