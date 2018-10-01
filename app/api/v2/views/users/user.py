@@ -57,4 +57,13 @@ class Users(Resource):
 
 
 class UsersActivity(Resource):
-    pass
+    """Class that contains users specific endpoints"""
+    def get(self, user_id):
+        """Method that get a particular user"""
+        user = User().get_user_by_user_id(user_id)
+        if user:
+            return {
+                "Name": user[1] + " " + user[2], "Email": user[3],
+                "Username": user[4], "Role": user[5],
+                "Created Date": str(user[8])}, 200
+        return responses.resource_does_not_exist_response()
