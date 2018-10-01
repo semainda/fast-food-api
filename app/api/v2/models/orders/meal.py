@@ -55,11 +55,7 @@ class Meal(BaseModel):
             sql, (meal_name, cat_id, description, price, meal_id)
             )
 
-        """"
-        def delete_meal(self, meal_id):
-            Method for delete specific meal
-            sql = "DELETE FROM meals WHERE meal_id=(%s);
-            cursor = self.conn.cursor()
-            cursor.execute(sql, (meal_id,))
-            self.commit()
-            self.close()"""
+    def delete_meal(self, meal_id):
+        """Method that delete meal"""
+        sql = "DELETE FROM meals WHERE meal_id=(%s) RETURNING meal_id;"
+        return self.cud_operations(sql, (meal_id,))

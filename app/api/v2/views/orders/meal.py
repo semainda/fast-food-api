@@ -111,3 +111,9 @@ class MealsActivity(Resource):
                 return responses.resource_does_not_exist_response()
             return responses.resource_does_not_exist_response()
         return responses.resource_with_invalid_entries_response()
+
+    def delete(self, meal_id):
+        """Method that delet particular resource"""
+        if Meal().delete_meal(meal_id):
+            return responses.resource_success_response()
+        return responses.resource_does_not_exist_response()
