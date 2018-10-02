@@ -91,3 +91,9 @@ class UsersActivity(Resource):
                 return responses.resource_success_response()
             return responses.resource_does_not_exist_response()
         return responses.resource_does_not_exist_response()
+
+    def delete(self, user_id):
+        """Method that delete a particular resource"""
+        if User().delete_user(user_id):
+            return responses.resource_success_response()
+        return responses.resource_does_not_exist_response()
