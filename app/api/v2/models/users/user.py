@@ -54,3 +54,9 @@ class User(BaseModel):
         """Method for get a specific user"""
         sql = "SELECT user_name, email FROM users WHERE user_name=%s OR email=%s;"
         return self.cud_operations(sql, (user_name, email))
+
+    def update_user(self, email, password, role, user_id):
+        """Method that updates specific user"""
+        sql = """UPDATE users SET email=(%s), password=(%s), user_role=(%s)
+                WHERE user_id=(%s) RETURNING user_id;"""
+        return self.cud_operations(sql, (email, password, role, user_id))
