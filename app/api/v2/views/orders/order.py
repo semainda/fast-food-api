@@ -11,6 +11,13 @@ from ...models.orders.order import Order
 
 class Orders(Resource):
     """Class that creates post and get endpoints"""
+    def get(self):
+        """Method that  gets resources"""
+        orders = Order().get_all_orders()
+        if orders:
+            return orders, 200
+        return responses.resource_does_not_exist_response()
+
     def post(self):
         """Method that creates resources"""
         parser = reqparse.RequestParser()
