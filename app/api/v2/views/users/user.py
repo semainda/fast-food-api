@@ -7,6 +7,7 @@ from flask_restful import Resource, reqparse
 from ...utils.validators import input_validators
 from ...responses import responses
 from ...models.users.user import User
+from .roles import user_roles
 
 
 class Users(Resource):
@@ -66,4 +67,27 @@ class UsersActivity(Resource):
                 "Name": user[1] + " " + user[2], "Email": user[3],
                 "Username": user[4], "Role": user[5],
                 "Created Date": str(user[8])}, 200
+        return responses.resource_does_not_exist_response()
+    
+    def put(self, user_id):
+        """Method that update a particular user details"""
+        parser = reqparse.RequestParser()
+        parser.add_argument("password",
+                            required=True,
+                            help="password keyword not found")
+        parser.add_argument("email",
+                            required=True,
+                            help="email keyword not found")
+        parser.add_argument("role",
+                            required=True,
+                            help="role keyword not found")
+
+        data_parsed = parser.parse_args()
+        email = data_parsed["email"]
+        password = data_parsed["password"]
+        role = data_parsed["role"]
+        if role in user_roles:
+            if User().update_user(email, password, role, user_id):
+                return responses.resource_success_response()
+            return responses.resource_does_not_exist_response()
         return responses.resource_does_not_exist_response()
