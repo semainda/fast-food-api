@@ -27,14 +27,15 @@ orders = """CREATE TABLE IF NOT EXISTS orders(
                     order_id serial PRIMARY KEY,
                     user_id int REFERENCES users(user_id) ON DELETE CASCADE,
                     status int DEFAULT 0,
-                    delivery_address text,
-                    created_date date NOT NULL);"""
+                    delivery_address text DEFAULT NULL,
+                    description text DEFAULT NULL,
+                    created_date date NOT NULL,
+                    delivery_time timestamp DEFAULT NULL);"""
 
 orders_items = """CREATE TABLE IF NOT EXISTS orders_items(
                     order_id int REFERENCES orders(order_id) ON DELETE CASCADE,
                     meal_id int  REFERENCES meals(meal_id) ON DELETE RESTRICT,
                     quantity int NOT NULL,
-                    description  varchar(80) NOT NULL,
                     PRIMARY KEY(order_id, meal_id));"""
 
 create_table_queries = [users, categories, meals, orders, orders_items]
