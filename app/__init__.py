@@ -8,6 +8,7 @@ from instance.config import APP_ENV_CONFIG
 from .api.v2.views.orders.category import Categories, CategoriesActivity
 from .api.v2.views.orders.meal import Meals, MealsActivity
 from .api.v2.views.users.user import Users, UsersActivity
+from .api.v2.views.orders.order import Orders
 from .db_config.db_setups import DatabaseOperations
 
 
@@ -41,4 +42,7 @@ api.add_resource(MealsActivity, "/menu/<int:meal_id>")
 # add users api routes
 api.add_resource(Users, "/users")
 api.add_resource(UsersActivity, "/users/<int:user_id>")
+
+# add order api routes
+api.add_resource(Orders, "/orders")
 
