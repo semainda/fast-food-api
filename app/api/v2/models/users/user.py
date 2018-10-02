@@ -60,3 +60,8 @@ class User(BaseModel):
         sql = """UPDATE users SET email=(%s), password=(%s), user_role=(%s)
                 WHERE user_id=(%s) RETURNING user_id;"""
         return self.cud_operations(sql, (email, password, role, user_id))
+
+    def delete_user(self, user_id):
+        """Method for delete specific user"""
+        sql = "DELETE FROM users WHERE user_id=(%s) RETURNING user_id;"
+        return self.cud_operations(sql, (user_id,))
