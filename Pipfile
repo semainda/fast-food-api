@@ -13,6 +13,9 @@ coverage = "*"
 gunicorn = "*"
 codecov = "*"
 pytest-cov = "*"
+"psycopg2-binary" = "*"
+passlib = "*"
+flask-jwt-extended = "*"
 
 [requires]
 python_version = "3.6"
