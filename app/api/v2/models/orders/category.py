@@ -16,7 +16,7 @@ class Category(BaseModel):
 
     def create_category(self, cat_name):
         """Method that create category"""
-        sql = "INSERT INTO categories(cat_name) VALUES(%s) RETURNING cat_id;"
+        sql = "INSERT INTO categories(cat_name) VALUES(%s) RETURNING cat_name;"
         return self.cud_operations(sql, (cat_name, ))
 
     def get_category_by_id(self, cat_id):
@@ -46,10 +46,10 @@ class Category(BaseModel):
     def update_category(self, cat_name, cat_id):
         """Method that update specific category"""
         sql = "UPDATE categories SET cat_name=(%s)\
-            WHERE cat_id=(%s) RETURNING cat_id;"
+            WHERE cat_id=(%s) RETURNING cat_name;"
         return self.cud_operations(sql, (cat_name, cat_id))
 
     def delete_category(self, cat_id):
         """Method that delete specific category"""
-        sql = "DELETE FROM categories WHERE cat_id=(%s) RETURNING cat_id CASCADE;"
+        sql = "DELETE FROM categories WHERE cat_id=(%s) RETURNING cat_name CASCADE;"
         return self.cud_operations(sql, (cat_id,))

@@ -8,8 +8,8 @@ create_category_cases = [
     ("", 400),
     (dict(category=49), 400),
     (dict(category="$%BBQ"), 400),
-    (dict(category="BBQ Chicken"), 200),
-    (dict(category="BBQ Chicken"), 200)
+    (dict(category="BBQ Chicken"), 201),
+    (dict(category="BBQ Chicken"), 409)
 ]
 
 @pytest.mark.parametrize("category, status_code", create_category_cases)
@@ -59,7 +59,7 @@ update_cases = [
     (1, "", 400),
     (1, dict(), 400),
     (2000, dict(category="BBQ"), 404),
-    (1, dict(category="BBQ Firigisi"), 200),
+    (1, dict(category="BBQ Firigisi"), 201),
     (1, dict(category="%BBQQ"), 400)
 ]
 @pytest.mark.parametrize("cat_id, cat_name, status_code", update_cases)
