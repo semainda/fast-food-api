@@ -11,7 +11,7 @@ class BaseModel:
 
     def read_items(self, query=None, val=None):
         """
-            Method that performs read operations to return effected rows
+            Method that performs read operations to return rows
         """
         with self.conn:
             with self.conn.cursor() as curr:
@@ -23,11 +23,11 @@ class BaseModel:
     def cud_operations(self, query=None, val=None):
         """
             Method that performs create,
-            update and delete operation to return the effected row
+            update and delete operation to return a row
         """
         with self.conn:
             with self.conn.cursor() as curr:
                 curr.execute(query, val)
                 row = curr.fetchone()
-        self.conn.close()
+        # self.conn.close()
         return row

@@ -8,11 +8,11 @@ meal_data_cases = [
         meal="Wali",
         category="BBQ Chicken",
         description="Saved with soup",
-        price=500), 404),
+        price=500), 401),
     (dict(
         category="BBQ Chicken",
         description="Saved with soup",
-        price=500), 400),
+        price=500), 401),
     (dict(
         meal="Wali",
         description="Saved with soup",

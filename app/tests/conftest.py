@@ -3,12 +3,13 @@
 import os
 import pytest
 from flask import current_app
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity, JWTManager 
 # Local imports
 from app import create_app
 from ..db_config.db_setups import DatabaseOperations
 # from app.db_setups import create_db_tables, destroy_db_tables
 
-TEST_CONFIG = os.getenv("ENV_CONFIG")
+TEST_CONFIG = os.getenv("TEST_CONFIG")
 
 @pytest.fixture(scope="session")
 def test_client():
@@ -18,6 +19,7 @@ def test_client():
     # setup
 
     app = create_app(TEST_CONFIG)
+    JWTManager(app)
     testing_client = app.test_client()
 
     # stop the flow and passes control to the tests
