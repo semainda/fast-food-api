@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is an api application compaises of several end points for a food delivery service app.
+This is an API application comprised of several endpoints for a food delivery service app.
 
 [![Build Status](https://travis-ci.com/semainda/fast-food-api.svg?branch=ft-delete-order-%23160535015)](https://travis-ci.com/semainda/fast-food-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/24d19424862c6612cb7d/maintainability)](https://codeclimate.com/github/semainda/fast-food-api/maintainability)
@@ -17,7 +17,7 @@ This is an api application compaises of several end points for a food delivery s
 1. Register a user
 2. Login a user
 3. Place an order for food
-4. Get order history for a perticular user
+4. Get the order history for a particular user
 5. Get all orders
 6. Add a specific order
 7. Update the status of an order
@@ -37,13 +37,13 @@ This is an api application compaises of several end points for a food delivery s
 
 ```$ cd fast-food-api```
 
-#### Step 2: Created virtual enviroment
+#### Step 2: Created virtual environment
 
-```$ apt get install pipenv```
+```$ apt-get install pipenv```
 
 ```$ pipenv --python 3.6```
 
-#### Step 3: Activate the virtual envinment
+#### Step 3: Activate the virtual environment
 
 ```$ pipenv shell```
 
@@ -52,7 +52,7 @@ This is an api application compaises of several end points for a food delivery s
 [```here```](https://github.com/semainda/fast-food-api) or ```git clone https://github.com/semainda/fast-food-api```
 
 
-#### Step 5: Install project dependances
+#### Step 5: Install project dependencies
 
 ```$ pipenv install```
 
@@ -87,7 +87,7 @@ POST  | /auth/logout | Sign out a user
 Method | Endpoint | Functionality
 ----| ---- | ---
 POST | users/orders | Place and order for food
-GET  | users/orders | Get the order history for a perticular user
+GET  | users/orders | Get the order history for a particular user
 GET  | /orders/ | Get all orders
 GET  | /orders/order_id | Add a specific order
 PUT  | /orders/order_id | Updated the status of an order
